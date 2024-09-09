@@ -1,0 +1,103 @@
+public class Product {
+    private String name;
+    private double price;
+    private String category;
+    private String grade;
+
+    public Product(String name, double price, String category, String grade) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.grade = grade;
+    }
+
+    // Getter and setter methods
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{name='" + name + "', price=" + price + ", category='" + category + "', grade='" + grade + "'}";
+    }
+}
+
+/ Define an IntPredicate to check if a number is prime
+        IntPredicate isPrime = number -> {
+            if (number <= 1) {
+                return false; // 0 and 1 are not prime numbers
+            }
+            if (number <= 3) {
+                return true; // 2 and 3 are prime numbers
+            }
+            if (number % 2 == 0 || number % 3 == 0) {
+                return false; // Multiples of 2 and 3 are not prime
+            }
+            for (int i = 5; i * i <= number; i += 6) {
+                if (number % i == 0 || number % (i + 2) == 0) {
+                    return false; // Check divisibility up to the square root of the number
+                }
+            }
+            return true;
+        };
+
+        // Test the IntPredicate with some sample numbers
+        int[] testNumbers = {1, 2, 3, 4, 5, 10, 17, 19, 25, 29};
+        
+        for (int num : testNumbers) {
+            System.out.println(num + " is prime: " + isPrime.test(num));
+        }
+================================================================================================================================
+// Define an IntConsumer to print the square of a given number
+        IntConsumer printSquare = number -> {
+            int square = number * number;
+            System.out.println("The square of " + number + " is " + square);
+        };
+
+        // Test the IntConsumer with some sample numbers
+        int[] testNumbers = {2, 4, 6, 8, 10};
+        
+        for (int num : testNumbers) {
+            printSquare.accept(num); // Use the IntConsumer to print the square of each number
+        }
+==================================================================================================================================
+// Create a Random object for generating random numbers
+        Random random = new Random();
+
+        // Define an IntSupplier to provide a random integer below 5000
+        IntSupplier randomIntSupplier = () -> random.nextInt(5000);
+
+        // Test the IntSupplier by generating and printing some random integers
+        for (int i = 0; i < 10; i++) {
+            int randomInt = randomIntSupplier.getAsInt();
+            System.out.println("Random integer below 5000: " + randomInt);
+        }
+=====================================================================================================================================

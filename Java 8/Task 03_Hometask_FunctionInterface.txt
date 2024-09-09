@@ -1,0 +1,200 @@
+public class Product {
+    private String name;
+    private double price;
+    private String category;
+    private int grade;
+
+    public Product(String name, double price, String category, int grade) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.grade = grade;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{name='" + name + "', price=" + price + ", category='" + category + "', grade=" + grade + "}";
+    }
+}
+
+// Define a functional interface to calculate the cost of products
+    @FunctionalInterface
+    interface ProductCostFunction {
+        double calculateCost(List<Product> products);
+    }
+
+    public static void main(String[] args) {
+        // Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2)
+        );
+
+        // Implement the functional interface to calculate the total cost
+        ProductCostFunction totalCostFunction = productList -> 
+            productList.stream()
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of all products
+        double totalCost = totalCostFunction.calculateCost(products);
+        System.out.println("Total cost of all products: $" + totalCost);
+    }
+=================================================================================================================================
+// Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2),
+            new Product("Tablet", 1100.00, "Electronics", 4) // Added example with price > 1000
+        );
+
+        // Implement the functional interface to calculate the total cost
+        ProductCostFunction totalCostFunction = productList -> 
+            productList.stream()
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of all products
+        double totalCost = totalCostFunction.calculateCost(products);
+        System.out.println("Total cost of all products: $" + totalCost);
+
+        // Define a predicate to filter products with price > 1000
+        Predicate<Product> priceGreaterThan1000 = product -> product.getPrice() > 1000;
+
+        // Implement the functional interface to calculate the total cost of filtered products
+        ProductCostFunction filteredCostFunction = productList -> 
+            productList.stream()
+                       .filter(priceGreaterThan1000)
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of products with price > 1000
+        double filteredCost = filteredCostFunction.calculateCost(products);
+        System.out.println("Total cost of products with price > 1000: $" + filteredCost);
+=========================================================================================================================
+// Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2),
+            new Product("Tablet", 1100.00, "Electronics", 4) // Example with Electronics category
+        );
+
+        // Implement the functional interface to calculate the total cost
+        ProductCostFunction totalCostFunction = productList -> 
+            productList.stream()
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of all products
+        double totalCost = totalCostFunction.calculateCost(products);
+        System.out.println("Total cost of all products: $" + totalCost);
+
+        // Define a predicate to filter products with price > 1000
+        Predicate<Product> priceGreaterThan1000 = product -> product.getPrice() > 1000;
+
+        // Implement the functional interface to calculate the total cost of filtered products
+        ProductCostFunction filteredCostFunction = productList -> 
+            productList.stream()
+                       .filter(priceGreaterThan1000)
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of products with price > 1000
+        double filteredCost = filteredCostFunction.calculateCost(products);
+        System.out.println("Total cost of products with price > 1000: $" + filteredCost);
+
+        // Define a predicate to filter electronic products
+        Predicate<Product> isElectronicsCategory = product -> "Electronics".equals(product.category);
+
+        // Implement the functional interface to calculate the total cost of electronic products
+        ProductCostFunction electronicsCostFunction = productList -> 
+            productList.stream()
+                       .filter(isElectronicsCategory)
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of electronic products
+        double electronicsCost = electronicsCostFunction.calculateCost(products);
+        System.out.println("Total cost of electronic products: $" + electronicsCost);
+============================================================================================================================
+// Define a functional interface to get filtered products
+    @FunctionalInterface
+    interface ProductFilterFunction {
+        List<Product> filterProducts(List<Product> products);
+    }
+
+// Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2),
+            new Product("Tablet", 1100.00, "Electronics", 4) // Example with Electronics category and price > 1000
+        );
+
+        // Implement the functional interface to calculate the total cost
+        ProductCostFunction totalCostFunction = productList -> 
+            productList.stream()
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of all products
+        double totalCost = totalCostFunction.calculateCost(products);
+        System.out.println("Total cost of all products: $" + totalCost);
+
+        // Define a predicate to filter products with price > 1000
+        Predicate<Product> priceGreaterThan1000 = product -> product.getPrice() > 1000;
+
+        // Implement the functional interface to calculate the total cost of filtered products
+        ProductCostFunction filteredCostFunction = productList -> 
+            productList.stream()
+                       .filter(priceGreaterThan1000)
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of products with price > 1000
+        double filteredCost = filteredCostFunction.calculateCost(products);
+        System.out.println("Total cost of products with price > 1000: $" + filteredCost);
+
+        // Define a predicate to filter electronic products
+        Predicate<Product> isElectronicsCategory = product -> "Electronics".equals(product.category);
+
+        // Implement the functional interface to calculate the total cost of electronic products
+        ProductCostFunction electronicsCostFunction = productList -> 
+            productList.stream()
+                       .filter(isElectronicsCategory)
+                       .mapToDouble(Product::getPrice)
+                       .sum();
+
+        // Calculate and print the total cost of electronic products
+        double electronicsCost = electronicsCostFunction.calculateCost(products);
+        System.out.println("Total cost of electronic products: $" + electronicsCost);
+
+        // Define a combined predicate to filter products with price > 1000 and category "Electronics"
+        Predicate<Product> priceGreaterThan1000AndElectronics = 
+            priceGreaterThan1000.and(isElectronicsCategory);
+
+        // Implement the functional interface to get filtered products
+        ProductFilterFunction filteredProductFunction = productList -> 
+            productList.stream()
+                       .filter(priceGreaterThan1000AndElectronics)
+                       .collect(Collectors.toList());
+
+        // Get and print products with price > 1000 and category "Electronics"
+        List<Product> filteredProducts = filteredProductFunction.filterProducts(products);
+        System.out.println("Products with price > 1000 and category 'Electronics':");
+        for (Product product : filteredProducts) {
+            System.out.println(product);
+        }
+===============================================================================================================================
+

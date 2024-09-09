@@ -1,0 +1,45 @@
+public class Employee {
+    private String name;
+    private String account;
+    private double salary;
+
+    // Parameterized constructor
+    public Employee(String name, String account, double salary) {
+        this.name = name;
+        this.account = account;
+        this.salary = salary;
+    }
+
+    // Getter methods
+    public String getName() {
+        return name;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', account='" + account + "', salary=" + salary + "}";
+    }
+}
+
+// Use a constructor reference to create Employee instances
+        Function<String[], Employee> employeeCreator = Employee::new;
+
+        // Create Employee objects using the constructor reference
+        String[] employee1Details = {"John Doe", "jdoe123", 55000.00};
+        Employee employee1 = employeeCreator.apply(employee1Details);
+
+        String[] employee2Details = {"Jane Smith", "jsmith456", 65000.00};
+        Employee employee2 = employeeCreator.apply(employee2Details);
+
+        // Print employee details
+        System.out.println("Employee 1 Details: " + employee1);
+        System.out.println("Employee 2 Details: " + employee2);
+=================================================================================================================================

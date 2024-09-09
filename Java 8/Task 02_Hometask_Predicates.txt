@@ -1,0 +1,318 @@
+public class Product {
+    private String name;
+    private double price;
+    private String category;
+    private int grade;
+
+    public Product(String name, double price, String category, int grade) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.grade = grade;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{name='" + name + "', price=" + price + ", category='" + category + "', grade=" + grade + "}";
+    }
+}
+
+public class Response {
+    private String responseBody;
+    private int statusCode;
+    private String responseType;
+
+    public Response(String responseBody, int statusCode, String responseType) {
+        this.responseBody = responseBody;
+        this.statusCode = statusCode;
+        this.responseType = responseType;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{responseBody='" + responseBody + "', statusCode=" + statusCode + ", responseType='" + responseType + "'}";
+    }
+}
+public static void main(String[] args) {
+        // Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2)
+        );
+
+        // Define a predicate to check if the price is greater than 1000
+        Predicate<Product> isPriceGreaterThan1000 = product -> product.getPrice() > 1000;
+
+        // Print products that match the predicate
+        System.out.println("Products with price greater than 1000:");
+        for (Product product : products) {
+            if (isPriceGreaterThan1000.test(product)) {
+                System.out.println(product);
+            }
+        }
+    }
+=======================================================================================================================================
+// Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2)
+        );
+
+        // Define a predicate to check if the price is greater than 1000
+        Predicate<Product> isPriceGreaterThan1000 = product -> product.getPrice() > 1000;
+
+        // Define a predicate to check if the product is of Electronics category
+        Predicate<Product> isElectronicsCategory = product -> "Electronics".equals(product.category);
+
+        // Print products with price greater than 1000
+        System.out.println("Products with price greater than 1000:");
+        for (Product product : products) {
+            if (isPriceGreaterThan1000.test(product)) {
+                System.out.println(product);
+            }
+        }
+
+        // Print products that are in the Electronics category
+        System.out.println("\nProducts in Electronics category:");
+        for (Product product : products) {
+            if (isElectronicsCategory.test(product)) {
+                System.out.println(product);
+            }
+        }
+======================================================================================================================================
+// Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2),
+            new Product("Headphones", 50.00, "Electronics", 4) // Added example below 100
+        );
+
+        // Define a predicate to check if the price is greater than 100
+        Predicate<Product> isPriceGreaterThan100 = product -> product.getPrice() > 100;
+
+        // Define a predicate to check if the product is of Electronics category
+        Predicate<Product> isElectronicsCategory = product -> "Electronics".equals(product.category);
+
+        // Combine predicates using `and` to check both conditions
+        Predicate<Product> isElectronicsAndPriceGreaterThan100 = isElectronicsCategory.and(isPriceGreaterThan100);
+
+        // Print products that are in Electronics category and price is greater than 100
+        System.out.println("Products in Electronics category with price greater than 100:");
+        for (Product product : products) {
+            if (isElectronicsAndPriceGreaterThan100.test(product)) {
+                System.out.println(product);
+            }
+        }
+======================================================================================================================================
+// Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2),
+            new Product("Headphones", 50.00, "Electronics", 4) // Added example below 100
+        );
+
+        // Define a predicate to check if the price is greater than 100
+        Predicate<Product> isPriceGreaterThan100 = product -> product.getPrice() > 100;
+
+        // Define a predicate to check if the product is of Electronics category
+        Predicate<Product> isElectronicsCategory = product -> "Electronics".equals(product.category);
+
+        // Combine predicates using `or` to check if either condition is true
+        Predicate<Product> isPriceGreaterThan100OrElectronicsCategory = 
+            isPriceGreaterThan100.or(isElectronicsCategory);
+
+        // Print products that either have price greater than 100 or are in Electronics category
+        System.out.println("Products with price greater than 100 or in Electronics category:");
+        for (Product product : products) {
+            if (isPriceGreaterThan100OrElectronicsCategory.test(product)) {
+                System.out.println(product);
+            }
+        }
+==================================================================================================================================
+// Create a list of products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 5),
+            new Product("Phone", 800.00, "Electronics", 4),
+            new Product("Desk", 1200.00, "Furniture", 3),
+            new Product("Chair", 500.00, "Furniture", 2),
+            new Product("Headphones", 50.00, "Electronics", 4), // Example with price less than 100
+            new Product("Keyboard", 80.00, "Electronics", 4) // Example with price less than 100
+        );
+
+        // Define a predicate to check if the price is less than 100
+        Predicate<Product> isPriceLessThan100 = product -> product.getPrice() < 100;
+
+        // Define a predicate to check if the product is of Electronics category
+        Predicate<Product> isElectronicsCategory = product -> "Electronics".equals(product.category);
+
+        // Combine predicates using `and` to check both conditions
+        Predicate<Product> isPriceLessThan100AndElectronicsCategory = 
+            isPriceLessThan100.and(isElectronicsCategory);
+
+        // Print products that meet both criteria: price less than 100 and in Electronics category
+        System.out.println("Products with price less than 100 and in Electronics category:");
+        for (Product product : products) {
+            if (isPriceLessThan100AndElectronicsCategory.test(product)) {
+                System.out.println(product);
+            }
+        }
+==================================================================================================================================
+// Create a list of responses
+        List<Response> responses = Arrays.asList(
+            new Response("Bad Request", 400, "Error"),
+            new Response("OK", 200, "Success"),
+            new Response("Unauthorized", 401, "Error"),
+            new Response("Not Found", 404, "Error"),
+            new Response("Internal Server Error", 500, "Error")
+        );
+
+        // Define a predicate to check if the status code is 400
+        Predicate<Response> isStatusCode400 = response -> response.getStatusCode() == 400;
+
+        // Print responses with status code 400
+        System.out.println("Responses with status code 400:");
+        for (Response response : responses) {
+            if (isStatusCode400.test(response)) {
+                System.out.println(response);
+            }
+        }
+==============================================================================================================================
+/ Create a list of responses
+        List<Response> responses = Arrays.asList(
+            new Response("Bad Request", 400, "Error"),
+            new Response("OK", 200, "Success"),
+            new Response("Unauthorized", 401, "Error"),
+            new Response("Not Found", 404, "Error"),
+            new Response("Internal Server Error", 500, "Error"),
+            new Response("{\"key\": \"value\"}", 200, "JSON"),
+            new Response("[{\"key\": \"value\"}]", 200, "JSON")
+        );
+
+        // Define a predicate to check if the status code is 400
+        Predicate<Response> isStatusCode400 = response -> response.getStatusCode() == 400;
+
+        // Define a predicate to check if the response type is JSON
+        Predicate<Response> isResponseTypeJSON = response -> "JSON".equals(response.responseType);
+
+        // Print responses with status code 400
+        System.out.println("Responses with status code 400:");
+        for (Response response : responses) {
+            if (isStatusCode400.test(response)) {
+                System.out.println(response);
+            }
+        }
+
+        // Print responses with response type JSON
+        System.out.println("\nResponses with response type JSON:");
+        for (Response response : responses) {
+            if (isResponseTypeJSON.test(response)) {
+                System.out.println(response);
+            }
+        }
+===============================================================================================================================
+ // Create a list of responses
+        List<Response> responses = Arrays.asList(
+            new Response("Bad Request", 400, "Error"),
+            new Response("OK", 200, "Success"),
+            new Response("Unauthorized", 401, "Error"),
+            new Response("Not Found", 404, "Error"),
+            new Response("Internal Server Error", 500, "Error"),
+            new Response("{\"key\": \"value\"}", 200, "JSON"),
+            new Response("[{\"key\": \"value\"}]", 200, "JSON"),
+            new Response("Invalid Request", 400, "JSON") // Added example with status 400 and JSON type
+        );
+
+        // Define a predicate to check if the status code is 400
+        Predicate<Response> isStatusCode400 = response -> response.getStatusCode() == 400;
+
+        // Define a predicate to check if the response type is JSON
+        Predicate<Response> isResponseTypeJSON = response -> "JSON".equals(response.responseType);
+
+        // Combine predicates using `and` to check both conditions
+        Predicate<Response> isStatusCode400AndResponseTypeJSON = 
+            isStatusCode400.and(isResponseTypeJSON);
+
+        // Print responses with status code 400 and response type JSON
+        System.out.println("Responses with status code 400 and response type JSON:");
+        for (Response response : responses) {
+            if (isStatusCode400AndResponseTypeJSON.test(response)) {
+                System.out.println(response);
+            }
+        }
+===============================================================================================================================
+// Create a list of responses
+        List<Response> responses = Arrays.asList(
+            new Response("Bad Request", 400, "Error"),
+            new Response("OK", 200, "Success"),
+            new Response("Unauthorized", 401, "Error"),
+            new Response("Not Found", 404, "Error"),
+            new Response("Internal Server Error", 500, "Error"),
+            new Response("{\"key\": \"value\"}", 200, "JSON"),
+            new Response("[{\"key\": \"value\"}]", 200, "JSON"),
+            new Response("Invalid Request", 400, "JSON") // Example with status 400 and JSON type
+        );
+
+        // Define a predicate to check if the status code is 400
+        Predicate<Response> isStatusCode400 = response -> response.getStatusCode() == 400;
+
+        // Define a predicate to check if the response type is JSON
+        Predicate<Response> isResponseTypeJSON = response -> "JSON".equals(response.responseType);
+
+        // Combine predicates using `or` to check if either condition is true
+        Predicate<Response> isStatusCode400OrResponseTypeJSON = 
+            isStatusCode400.or(isResponseTypeJSON);
+
+        // Print responses with status code 400 or response type JSON
+        System.out.println("Responses with status code 400 or response type JSON:");
+        for (Response response : responses) {
+            if (isStatusCode400OrResponseTypeJSON.test(response)) {
+                System.out.println(response);
+            }
+        }
+======================================================================================================================================
+// Create a list of responses
+        List<Response> responses = Arrays.asList(
+            new Response("Bad Request", 400, "Error"),
+            new Response("OK", 200, "Success"),
+            new Response("Unauthorized", 401, "Error"),
+            new Response("Not Found", 404, "Error"),
+            new Response("Internal Server Error", 500, "Error"),
+            new Response("{\"key\": \"value\"}", 200, "JSON"),
+            new Response("[{\"key\": \"value\"}]", 200, "JSON"),
+            new Response("Invalid Request", 400, "JSON") // Example with status 400 and JSON type
+        );
+
+        // Define a predicate to check if the status code is not 400
+        Predicate<Response> isNotStatusCode400 = response -> response.getStatusCode() != 400;
+
+        // Define a predicate to check if the response type is JSON
+        Predicate<Response> isResponseTypeJSON = response -> "JSON".equals(response.responseType);
+
+        // Combine predicates using `and` to check both conditions
+        Predicate<Response> isNotStatusCode400AndResponseTypeJSON = 
+            isNotStatusCode400.and(isResponseTypeJSON);
+
+        // Print responses with status code not 400 and response type JSON
+        System.out.println("Responses with status code not 400 and response type JSON:");
+        for (Response response : responses) {
+            if (isNotStatusCode400AndResponseTypeJSON.test(response)) {
+                System.out.println(response);
+            }
+        }
+======================================================================================================================================

@@ -1,0 +1,398 @@
+String s = "madam";
+StringBuilder sb = new StringBuilder(s).reverse().toString();
+if(s.equals(sb))
+{
+System.out.print("palindrome");
+}
+else
+{
+System.out.print("not palindrome");
+}
+---------------------------------------------------------------------------------
+String str = "madam";
+Predicate<String> isPalindrome = s -> 
+            s.equals(new StringBuilder(s).reverse().toString());
+        
+boolean result = isPalindrome.test(str);
+System.out.println("Is \"" + str + "\" a palindrome? " + result);
+====================================================================================
+public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(3, 5, 7, 2, 8, 10, 6);
+        int secondBiggest = findSecondBiggest(numbers);
+        System.out.println("The 2nd biggest number is: " + secondBiggest);
+    }
+
+    public static int findSecondBiggest(List<Integer> numbers) {
+        Collections.sort(numbers, Collections.reverseOrder());
+        return numbers.get(1);  // The second element in the sorted list is the 2nd biggest
+    }
+------------------------------------------------------------------------------------------------
+public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(3, 5, 7, 2, 8, 10, 6);
+        
+        int secondBiggest = numbers.stream()
+                                   .sorted(Comparator.reverseOrder())
+                                   .skip(1)
+                                   .findFirst()
+                                   .get();
+        
+        System.out.println("The 2nd biggest number is: " + secondBiggest);
+    }
+=====================================================================================================
+String str1 = "abcd";
+        String str2 = "cdab";
+
+        BiPredicate<String, String> areRotations = (s1, s2) -> 
+            s1.length() == s2.length() && (s1 + s1).contains(s2);
+
+        boolean result = areRotations.test(str1, str2);
+        System.out.println("Are \"" + str1 + "\" and \"" + str2 + "\" rotations of each other? " + result);
+-----------------------------------------------------------------------------------------------------------------
+public static void main(String[] args) {
+        String str1 = "abcd";
+        String str2 = "cdab";
+        
+        boolean areRotations = areRotations(str1, str2);
+        System.out.println("Are \"" + str1 + "\" and \"" + str2 + "\" rotations of each other? " + areRotations);
+    }
+
+    public static boolean areRotations(String str1, String str2) {
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        String combined = str1 + str1;
+        return combined.contains(str2);
+    }
+==========================================================================================================================
+// Use a lambda expression to define the Runnable
+        Runnable numberPrinter = () -> {
+            for (int i = 1; i <= 10; i++) {
+                System.out.println(i);
+            }
+        };
+
+        // Create a Thread with the Runnable and start it
+        Thread thread = new Thread(numberPrinter);
+        thread.start();
+---------------------------------------------------------------------------------------
+// Create a Runnable that prints numbers from 1 to 10
+        Runnable numberPrinter = new Runnable() {
+          
+            public void run() {
+                for (int i = 1; i <= 10; i++) {
+                    System.out.println(i);
+                }
+            }
+        };
+
+        // Create a Thread with the Runnable and start it
+        Thread thread = new Thread(numberPrinter);
+        thread.start();
+===========================================================================================================================
+List<Integer> numbers = Arrays.asList(3, 5, 7, 2, 8, 10, 6);
+
+        // Create a Comparator to sort in reverse order
+        Comparator<Integer> reverseOrderComparator = new Comparator<Integer>() {
+            
+            public int compare(Integer num1, Integer num2) {
+                return num2.compareTo(num1); // Reverse order comparison
+            }
+        };
+
+        // Sort the list using the reverse order Comparator
+        Collections.sort(numbers, reverseOrderComparator);
+
+        // Print the sorted list
+        System.out.println("Sorted list in reverse order: " + numbers);
+--------------------------------------------------------------------------------------------------------------------------
+List<Integer> numbers = Arrays.asList(3, 5, 7, 2, 8, 10, 6);
+
+        // Sort the list in reverse order using a lambda expression
+        Collections.sort(numbers, (num1, num2) -> num2.compareTo(num1));
+
+        // Print the sorted list
+        System.out.println("Sorted list in reverse order: " + numbers);
+=============================================================================================================================
+public class Employee {
+    private String name;
+    private int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', id=" + id + "}";
+    }
+}
+
+public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("John", 101),
+            new Employee("Alice", 102),
+            new Employee("Bob", 103)
+        );
+
+        // Create a Comparator to sort employees by name in alphabetical order
+        Comparator<Employee> nameComparator = new Comparator<Employee>() {
+            @Override
+            public int compare(Employee e1, Employee e2) {
+                return e1.getName().compareTo(e2.getName());
+            }
+        };
+
+        // Sort the list using the name Comparator
+        Collections.sort(employees, nameComparator);
+
+        // Print the sorted list
+        System.out.println("Employees sorted by name: " + employees);
+    }
+-----------------------------------------------------------------------------------------------------------
+public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("John", 101),
+            new Employee("Alice", 102),
+            new Employee("Bob", 103)
+        );
+
+        // Sort the list by name in alphabetical order using a lambda expression
+        Collections.sort(employees, (e1, e2) -> e1.getName().compareTo(e2.getName()));
+
+        // Print the sorted list
+        System.out.println("Employees sorted by name: " + employees);
+    }
+===================================================================================================================
+// Create a Comparator to sort in reverse order
+        Comparator<Integer> reverseOrderComparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer num1, Integer num2) {
+                return num2.compareTo(num1); // Reverse order comparison
+            }
+        };
+
+        // Create a TreeSet with the reverse order Comparator
+        TreeSet<Integer> numbers = new TreeSet<>(reverseOrderComparator);
+        numbers.add(5);
+        numbers.add(1);
+        numbers.add(10);
+        numbers.add(3);
+
+        // Print the TreeSet
+        System.out.println("TreeSet in reverse order: " + numbers);
+-------------------------------------------------------------------------------------------------------------------
+// Create a TreeSet with a reverse order Comparator using a lambda expression
+        TreeSet<Integer> numbers = new TreeSet<>((num1, num2) -> num2.compareTo(num1));
+
+        numbers.add(5);
+        numbers.add(1);
+        numbers.add(10);
+        numbers.add(3);
+
+        // Print the TreeSet
+        System.out.println("TreeSet in reverse order: " + numbers);
+=====================================================================================================================
+ublic class Employee {
+    private String name;
+    private int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', id=" + id + "}";
+    }
+}
+
+
+// Create a Comparator to sort employees by name in alphabetical order
+        Comparator<Employee> nameComparator = new Comparator<Employee>() {
+            @Override
+            public int compare(Employee e1, Employee e2) {
+                return e1.getName().compareTo(e2.getName());
+            }
+        };
+
+        // Create a TreeSet with the name Comparator
+        TreeSet<Employee> employees = new TreeSet<>(nameComparator);
+        employees.add(new Employee("John", 101));
+        employees.add(new Employee("Alice", 102));
+        employees.add(new Employee("Bob", 103));
+
+        // Print the TreeSet
+        System.out.println("Employees sorted by name: " + employees);
+--------------------------------------------------------------------------------------------------------------
+// Create a TreeSet with a Comparator using a lambda expression
+        TreeSet<Employee> employees = new TreeSet<>((e1, e2) -> e1.getName().compareTo(e2.getName()));
+
+        employees.add(new Employee("John", 101));
+        employees.add(new Employee("Alice", 102));
+        employees.add(new Employee("Bob", 103));
+
+        // Print the TreeSet
+        System.out.println("Employees sorted by name: " + employees);
+==================================================================================================================
+// Create a Comparator to sort in descending order
+        Comparator<Integer> reverseOrderComparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer num1, Integer num2) {
+                return num2.compareTo(num1); // Reverse order comparison
+            }
+        };
+
+        // Create a TreeMap with the reverse order Comparator
+        TreeMap<Integer, String> map = new TreeMap<>(reverseOrderComparator);
+        map.put(5, "Five");
+        map.put(1, "One");
+        map.put(10, "Ten");
+        map.put(3, "Three");
+
+        // Print the TreeMap
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+---------------------------------------------------------------------------------------------------------------------------------
+// Create a TreeMap with a Comparator using a lambda expression
+        TreeMap<Integer, String> map = new TreeMap<>((num1, num2) -> num2.compareTo(num1));
+
+        map.put(5, "Five");
+        map.put(1, "One");
+        map.put(10, "Ten");
+        map.put(3, "Three");
+
+        // Print the TreeMap
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+======================================================================================================================
+public class Employee {
+    private String name;
+    private int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', id=" + id + "}";
+    }
+}
+
+// Create a Comparator to sort employees by name in descending order
+        Comparator<Employee> nameComparator = new Comparator<Employee>() {
+            @Override
+            public int compare(Employee e1, Employee e2) {
+                return e2.getName().compareTo(e1.getName()); // Descending order comparison
+            }
+        };
+
+        // Create a TreeMap with the name Comparator
+        TreeMap<Employee, Integer> map = new TreeMap<>(nameComparator);
+        map.put(new Employee("John", 101), 101);
+        map.put(new Employee("Alice", 102), 102);
+        map.put(new Employee("Bob", 103), 103);
+
+        // Print the TreeMap
+        for (Map.Entry<Employee, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+----------------------------------------------------------------------------------------------------------------------
+// Create a TreeMap with a Comparator using a lambda expression
+        TreeMap<Employee, Integer> map = new TreeMap<>((e1, e2) -> e2.getName().compareTo(e1.getName()));
+
+        map.put(new Employee("John", 101), 101);
+        map.put(new Employee("Alice", 102), 102);
+        map.put(new Employee("Bob", 103), 103);
+
+        // Print the TreeMap
+        for (Map.Entry<Employee, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+===========================================================================================================================
+public class Employee {
+    private String name;
+    private int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', id=" + id + "}";
+    }
+}
+
+List<Employee> employees = Arrays.asList(
+            new Employee("John", 101),
+            new Employee("Alice", 102),
+            new Employee("Bob", 103)
+        );
+
+        // Create a Comparator to sort employees by name in descending order
+        Comparator<Employee> nameComparator = new Comparator<Employee>() {
+            @Override
+            public int compare(Employee e1, Employee e2) {
+                return e2.getName().compareTo(e1.getName()); // Descending order comparison
+            }
+        };
+
+        // Sort the list using Collections.sort and the Comparator
+        Collections.sort(employees, nameComparator);
+
+        // Print the sorted list
+        System.out.println("Employees sorted by name in descending order: " + employees);
+    }
+-----------------------------------------------------------------------------------------------------------------------------
+ist<Employee> employees = Arrays.asList(
+            new Employee("John", 101),
+            new Employee("Alice", 102),
+            new Employee("Bob", 103)
+        );
+
+        // Sort the list using Collections.sort and a lambda expression
+        Collections.sort(employees, (e1, e2) -> e2.getName().compareTo(e1.getName()));
+
+        // Print the sorted list
+        System.out.println("Employees sorted by name in descending order: " + employees);
+    }
+=================================================================================================================================

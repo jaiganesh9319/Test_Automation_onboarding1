@@ -1,0 +1,174 @@
+public class Product {
+    private String name;
+    private double price;
+    private String category;
+    private String grade; // Changed grade from int to String to match 'Premium'
+
+    public Product(String name, double price, String category, String grade) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.grade = grade;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{name='" + name + "', price=" + price + ", category='" + category + "', grade='" + grade + "'}";
+    }
+}
+
+// Create a sample product
+        Product product = new Product("Laptop", 1500.00, "Electronics", 5);
+
+        // Define the print parameter
+        String printParameter = "file"; // Change to "console" for console output
+
+        // Define a Consumer to print the product based on the print parameter
+        Consumer<Product> productPrinter = p -> {
+            if ("file".equalsIgnoreCase(printParameter)) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("product.txt", true))) {
+                    writer.write(p.toString());
+                    writer.newLine();
+                    System.out.println("Product information written to file.");
+                } catch (IOException e) {
+                    System.err.println("Failed to write to file: " + e.getMessage());
+                }
+            } else {
+                System.out.println(p);
+            }
+        };
+
+        // Use the consumer to print the product
+        productPrinter.accept(product);
+===========================================================================================================================
+// Create a list of sample products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 1500.00, "Electronics", 3),
+            new Product("Phone", 800.00, "Electronics", 2),
+            new Product("Desk", 1200.00, "Furniture", 4),
+            new Product("Chair", 500.00, "Furniture", 1),
+            new Product("Tablet", 1100.00, "Electronics", 2) // Example with price > 1000
+        );
+
+        // Define a Consumer to update the grade to 'Premium' if price > 1000
+        Consumer<Product> updateGradeIfPriceAbove1000 = product -> {
+            if (product.getPrice() > 1000) {
+                product.setGrade("Premium"); // Assuming you have a setGrade method to update the grade
+            }
+        };
+
+        // Update the grade for each product based on the condition
+        products.forEach(updateGradeIfPriceAbove1000);
+
+        // Define a Consumer to print product details to the console
+        Consumer<Product> printProduct = product -> System.out.println(product);
+
+        // Print all updated products
+        System.out.println("Updated products:");
+        products.forEach(printProduct);
+=================================================================================================================================
+// Create a list of sample products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 3500.00, "Electronics", "Standard"), // Example with price > 3000
+            new Product("Phone", 1500.00, "Electronics", "Standard"),
+            new Product("Desk", 1200.00, "Furniture", "Standard"),
+            new Product("Chair", 500.00, "Furniture", "Standard"),
+            new Product("Tablet", 1100.00, "Electronics", "Standard")
+        );
+
+        // Define a Consumer to update the grade to 'Premium' if price > 1000
+        Consumer<Product> updateGradeIfPriceAbove1000 = product -> {
+            if (product.getPrice() > 1000) {
+                product.setGrade("Premium");
+            }
+        };
+
+        // Define a Consumer to update the name to be suffixed with '*' if price > 3000
+        Consumer<Product> updateNameIfPriceAbove3000 = product -> {
+            if (product.getPrice() > 3000) {
+                product.setName(product.getName() + "*"); // Assuming am have a setName method to update the name
+            }
+        };
+
+        // Update the grade for each product based on the condition
+        products.forEach(updateGradeIfPriceAbove1000);
+
+        // Update the name for each product based on the condition
+        products.forEach(updateNameIfPriceAbove3000);
+
+        // Define a Consumer to print product details to the console
+        Consumer<Product> printProduct = product -> System.out.println(product);
+
+        // Print all updated products
+        System.out.println("Updated products:");
+        products.forEach(printProduct);
+===================================================================================================================================
+// Create a list of sample products
+        List<Product> products = Arrays.asList(
+            new Product("Laptop", 3500.00, "Electronics", "Standard"), // Example with price > 3000
+            new Product("Phone", 1500.00, "Electronics", "Standard"),
+            new Product("Desk", 1200.00, "Furniture", "Standard"),
+            new Product("Chair", 500.00, "Furniture", "Standard"),
+            new Product("Tablet", 1100.00, "Electronics", "Standard")
+        );
+
+        // Define a Consumer to update the grade to 'Premium' if price > 1000
+        Consumer<Product> updateGradeIfPriceAbove1000 = product -> {
+            if (product.getPrice() > 1000) {
+                product.setGrade("Premium");
+            }
+        };
+
+        // Define a Consumer to update the name to be suffixed with '*' if price > 3000
+        Consumer<Product> updateNameIfPriceAbove3000 = product -> {
+            if (product.getPrice() > 3000) {
+                product.setName(product.getName() + "*"); // Assuming am have a setName method to update the name
+            }
+        };
+
+        // Update the grade for each product based on the condition
+        products.forEach(updateGradeIfPriceAbove1000);
+
+        // Update the name for each product based on the condition
+        products.forEach(updateNameIfPriceAbove3000);
+
+        // Define a Predicate to filter Premium grade products with name suffixed with '*'
+        Predicate<Product> isPremiumGradeWithSuffix = product ->
+            "Premium".equals(product.getGrade()) && product.getName().endsWith("*");
+
+        // Filter and collect the Premium grade products with name suffixed with '*'
+        List<Product> premiumProductsWithSuffix = products.stream()
+            .filter(isPremiumGradeWithSuffix)
+            .collect(Collectors.toList());
+
+        // Define a Consumer to print product details to the console
+        Consumer<Product> printProduct = product -> System.out.println(product);
+
+        // Print all Premium grade products with name suffixed with '*'
+        System.out.println("Premium grade products with name suffixed with '*':");
+        premiumProductsWithSuffix.forEach(printProduct);
+===================================================================================================================================

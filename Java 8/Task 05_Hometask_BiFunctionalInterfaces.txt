@@ -1,0 +1,85 @@
+public class Product {
+    private String name;
+    private double price;
+    private String category;
+    private String grade;
+
+    public Product(String name, double price, String category, String grade) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.grade = grade;
+    }
+
+    // Getter and setter methods
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{name='" + name + "', price=" + price + ", category='" + category + "', grade='" + grade + "'}";
+    }
+}
+
+// Define a BiFunction to create a Product given the name and price
+        BiFunction<String, Double, Product> createProduct = (name, price) -> 
+            new Product(name, price, "Unknown", "Standard"); // Default values for category and grade
+
+        // Create a Product using the BiFunction
+        Product newProduct = createProduct.apply("Smartwatch", 299.99);
+
+        // Print the created Product
+        System.out.println("Created product: " + newProduct);
+=================================================================================================================================
+// Define some sample products
+        Product product1 = new Product("Smartwatch", 299.99, "Electronics", "Standard");
+        Product product2 = new Product("Laptop", 1500.00, "Electronics", "Premium");
+        Product product3 = new Product("Desk", 1200.00, "Furniture", "Standard");
+
+        // Create a cart with products and their quantities
+        Map<Product, Integer> cart = new HashMap<>();
+        cart.put(product1, 2); // 2 Smartwatches
+        cart.put(product2, 1); // 1 Laptop
+        cart.put(product3, 3); // 3 Desks
+
+        // Define a BiFunction to calculate the cost of a product given its quantity
+        BiFunction<Product, Integer, Double> calculateCost = (product, quantity) ->
+            product.getPrice() * quantity;
+
+        // Calculate the total cost of the cart
+        double totalCost = cart.entrySet().stream()
+            .map(entry -> calculateCost.apply(entry.getKey(), entry.getValue())) // Calculate cost for each product
+            .reduce(0.0, Double::sum); // Sum all costs
+
+        // Print the total cost of the cart
+        System.out.println("Total cost of the cart: $" + totalCost);
+====================================================================================================================================

@@ -1,0 +1,56 @@
+// Define a Predicate to check if a given date is yesterday
+        Predicate<LocalDate> isYesterday = date -> {
+            LocalDate today = LocalDate.now();
+            LocalDate yesterday = today.minusDays(1);
+            return date.isEqual(yesterday);
+        };
+
+        // Test the Predicate with some sample dates
+        LocalDate testDate1 = LocalDate.now().minusDays(1); // Should be yesterday
+        LocalDate testDate2 = LocalDate.now(); // Should not be yesterday
+
+        // Apply the Predicate and print results
+        System.out.println("Is testDate1 yesterday? " + isYesterday.test(testDate1));
+        System.out.println("Is testDate2 yesterday? " + isYesterday.test(testDate2));
+===================================================================================================
+// Define a Supplier to get the date of the next Thursday
+        Supplier<LocalDate> nextThursdaySupplier = () -> {
+            LocalDate today = LocalDate.now();
+            LocalDate nextThursday = today.with(java.time.temporal.TemporalAdjusters.next(DayOfWeek.THURSDAY));
+            return nextThursday;
+        };
+
+        // Get and print the next Thursday date
+        LocalDate nextThursday = nextThursdaySupplier.get();
+        System.out.println("Next Thursday's date: " + nextThursday);
+========================================================================================================================
+// Define a Supplier to get the current time in EST timezone
+        Supplier<ZonedDateTime> currentTimeInESTSupplier = () -> {
+            // Define the EST timezone
+            ZoneId estZoneId = ZoneId.of("America/New_York");
+            // Get current time in the EST timezone
+            return ZonedDateTime.now(estZoneId);
+        };
+
+        // Get and print the current time in EST
+        ZonedDateTime currentTimeInEST = currentTimeInESTSupplier.get();
+        System.out.println("Current time in EST: " + currentTimeInEST);
+======================================================================================================================
+// Define a Function to calculate the age from date of birth
+        Function<LocalDate, Integer> calculateAge = birthDate -> {
+            LocalDate today = LocalDate.now();
+            if (birthDate == null) {
+                throw new IllegalArgumentException("Date of birth cannot be null");
+            }
+            // Calculate the period between the birth date and today
+            Period period = Period.between(birthDate, today);
+            return period.getYears();
+        };
+
+        // Example date of birth
+        LocalDate dateOfBirth = LocalDate.of(1993, 11, 19);
+
+        // Calculate and print the age
+        int age = calculateAge.apply(dateOfBirth);
+        System.out.println("Age: " + age);
+==============================================================================================================================
