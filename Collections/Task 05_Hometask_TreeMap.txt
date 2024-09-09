@@ -1,0 +1,60 @@
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int T = scanner.nextInt(); // Number of test cases
+        scanner.nextLine(); // Consume the newline
+        
+        StringBuilder output = new StringBuilder();
+        
+        for (int t = 0; t < T; t++) {
+            int Q = scanner.nextInt(); // Number of queries
+            scanner.nextLine(); // Consume the newline
+            
+            TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+            
+            for (int q = 0; q < Q; q++) {
+                String query = scanner.next();
+                
+                switch (query) {
+                    case "a":
+                        int key = scanner.nextInt();
+                        int value = scanner.nextInt();
+                        treeMap.put(key, value);
+                        break;
+                        
+                    case "b":
+                        key = scanner.nextInt();
+                        if (treeMap.containsKey(key)) {
+                            output.append(treeMap.get(key)).append(" ");
+                        } else {
+                            output.append("-1 ").append(" ");
+                        }
+                        break;
+                        
+                    case "c":
+                        output.append(treeMap.size()).append(" ");
+                        break;
+                        
+                    case "d":
+                        key = scanner.nextInt();
+                        treeMap.remove(key);
+                        break;
+                        
+                    case "e":
+                        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
+                            output.append(entry.getKey()).append("=").append(entry.getValue()).append(" ");
+                        }
+                        break;
+                        
+                    default:
+                        throw new IllegalArgumentException("Invalid query type");
+                }
+            }
+            
+            output.append("\n");
+        }
+        
+        scanner.close();
+        System.out.print(output.toString());
+    }
+=============================================================================================================================

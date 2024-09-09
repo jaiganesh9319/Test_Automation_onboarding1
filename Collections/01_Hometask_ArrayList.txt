@@ -1,0 +1,42 @@
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Number of lines
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        // ArrayList of ArrayLists to store the lines of integers
+        ArrayList<ArrayList<Integer>> lines = new ArrayList<>();
+
+        // Read each line and populate the ArrayList of ArrayLists
+        for (int i = 0; i < n; i++) {
+            String[] lineInput = scanner.nextLine().split(" ");
+            int numIntegers = Integer.parseInt(lineInput[0]);
+            ArrayList<Integer> line = new ArrayList<>();
+            for (int j = 1; j <= numIntegers; j++) {
+                line.add(Integer.parseInt(lineInput[j]));
+            }
+            lines.add(line);
+        }
+
+        // Number of queries
+        int q = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        // Process each query
+        for (int i = 0; i < q; i++) {
+            String[] queryInput = scanner.nextLine().split(" ");
+            int lineIndex = Integer.parseInt(queryInput[0]) - 1; // Convert to 0-based index
+            int position = Integer.parseInt(queryInput[1]) - 1;  // Convert to 0-based index
+
+            // Check if the lineIndex and position are valid
+            if (lineIndex >= 0 && lineIndex < lines.size() && position >= 0 && position < lines.get(lineIndex).size()) {
+                System.out.println(lines.get(lineIndex).get(position));
+            } else {
+                System.out.println("ERROR!");
+            }
+        }
+
+        scanner.close();
+    }
+==================================================================================================================================

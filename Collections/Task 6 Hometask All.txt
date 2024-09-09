@@ -1,0 +1,102 @@
+public static void main(String[] args) {
+        // Demonstrating ArrayList
+        System.out.println("ArrayList:");
+        List<String> arrayList = new ArrayList<>();
+        arrayList.add("Apple");
+        arrayList.add("Banana");
+        arrayList.add("Cherry");
+        arrayList.add("Date");
+        System.out.println("ArrayList: " + arrayList);
+        System.out.println("Element at index 2: " + arrayList.get(2));
+        arrayList.remove("Banana");
+        System.out.println("After removing Banana: " + arrayList);
+        System.out.println();
+        
+        // Demonstrating LinkedList
+        System.out.println("LinkedList:");
+        LinkedList<String> linkedList = new LinkedList<>();
+        linkedList.add("Elephant");
+        linkedList.add("Frog");
+        linkedList.add("Giraffe");
+        linkedList.addFirst("Cat");
+        linkedList.addLast("Hawk");
+        System.out.println("LinkedList: " + linkedList);
+        System.out.println("First element: " + linkedList.getFirst());
+        linkedList.remove("Frog");
+        System.out.println("After removing Frog: " + linkedList);
+        System.out.println();
+        
+        // Demonstrating HashMap
+        System.out.println("HashMap:");
+        Map<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("John", 25);
+        hashMap.put("Jane", 30);
+        hashMap.put("Tom", 22);
+        System.out.println("HashMap: " + hashMap);
+        System.out.println("Value for key 'Jane': " + hashMap.get("Jane"));
+        hashMap.remove("Tom");
+        System.out.println("After removing Tom: " + hashMap);
+        System.out.println();
+        
+        // Demonstrating LinkedHashMap
+        System.out.println("LinkedHashMap:");
+        Map<String, Integer> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("Alice", 28);
+        linkedHashMap.put("Bob", 35);
+        linkedHashMap.put("Carol", 40);
+        System.out.println("LinkedHashMap: " + linkedHashMap);
+        System.out.println("Value for key 'Bob': " + linkedHashMap.get("Bob"));
+        linkedHashMap.remove("Alice");
+        System.out.println("After removing Alice: " + linkedHashMap);
+        System.out.println();
+        
+        // Demonstrating HashSet
+        System.out.println("HashSet:");
+        Set<String> hashSet = new HashSet<>();
+        hashSet.add("Lion");
+        hashSet.add("Tiger");
+        hashSet.add("Bear");
+        hashSet.add("Lion"); // Duplicate entry
+        System.out.println("HashSet: " + hashSet);
+        System.out.println("Contains 'Tiger': " + hashSet.contains("Tiger"));
+        hashSet.remove("Bear");
+        System.out.println("After removing Bear: " + hashSet);
+        System.out.println();
+        
+        // Demonstrating LinkedHashSet
+        System.out.println("LinkedHashSet:");
+        Set<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("Sun");
+        linkedHashSet.add("Moon");
+        linkedHashSet.add("Star");
+        linkedHashSet.add("Sun"); // Duplicate entry
+        System.out.println("LinkedHashSet: " + linkedHashSet);
+        System.out.println("Contains 'Moon': " + linkedHashSet.contains("Moon"));
+        linkedHashSet.remove("Star");
+        System.out.println("After removing Star: " + linkedHashSet);
+        System.out.println();
+        
+        // Demonstrating TreeSet
+        System.out.println("TreeSet:");
+        Set<String> treeSet = new TreeSet<>();
+        treeSet.add("Banana");
+        treeSet.add("Apple");
+        treeSet.add("Cherry");
+        System.out.println("TreeSet (sorted): " + treeSet);
+        System.out.println("Contains 'Apple': " + treeSet.contains("Apple"));
+        treeSet.remove("Cherry");
+        System.out.println("After removing Cherry: " + treeSet);
+        System.out.println();
+        
+        // Demonstrating TreeMap
+        System.out.println("TreeMap:");
+        Map<String, Integer> treeMap = new TreeMap<>();
+        treeMap.put("One", 1);
+        treeMap.put("Three", 3);
+        treeMap.put("Two", 2);
+        System.out.println("TreeMap (sorted by key): " + treeMap);
+        System.out.println("Value for key 'Three': " + treeMap.get("Three"));
+        treeMap.remove("One");
+        System.out.println("After removing key 'One': " + treeMap);
+    }
+=======================================================================================================

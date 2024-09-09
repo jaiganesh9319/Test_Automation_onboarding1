@@ -1,0 +1,32 @@
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Read the number of entries in the phone book
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        // Create a HashMap to store the phone book entries
+        Map<String, String> phoneBook = new HashMap<>();
+
+        // Read phone book entries
+        for (int i = 0; i < n; i++) {
+            String name = scanner.nextLine();
+            String phoneNumber = scanner.nextLine();
+            phoneBook.put(name, phoneNumber);
+        }
+
+        // Read and process queries
+        while (scanner.hasNextLine()) {
+            String query = scanner.nextLine();
+            if (phoneBook.containsKey(query)) {
+                // Print the phone number if the name is found
+                System.out.println(query + "=" + phoneBook.get(query));
+            } else {
+                // Print "Not found" if the name is not in the phone book
+                System.out.println("Not found");
+            }
+        }
+
+        scanner.close();
+    }
+====================================================================================================

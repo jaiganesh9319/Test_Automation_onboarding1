@@ -1,0 +1,63 @@
+public class Player {
+    String name;
+    int score;
+
+    // Constructor
+    public Player(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    // Getters for name and score
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + score;
+    }
+}
+
+public class Checker implements Comparator<Player> {
+    @Override
+    public int compare(Player a, Player b) {
+        // First compare by score in descending order
+        if (a.getScore() != b.getScore()) {
+            return b.getScore() - a.getScore();
+        }
+        // If scores are the same, compare by name in alphabetical order
+        return a.getName().compareTo(b.getName());
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        List<Player> playerList = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String name = scanner.next();
+            int score = scanner.nextInt();
+            playerList.add(new Player(name, score));
+        }
+
+        // Sort the player list using the Checker comparator
+        Collections.sort(playerList, new Checker());
+
+        // Print the sorted players
+        for (Player player : playerList) {
+            System.out.println(player);
+        }
+
+        scanner.close();
+    }
+}
+===================================================================================================================
