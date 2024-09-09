@@ -1,0 +1,354 @@
+Task 1 - OOPS TASK
+----------------------------------------------------
+
+// Class to represent the Base of the Pizza
+class Base {
+    private String type;
+    private double cost;
+
+    public Base(String type, double cost) {
+        this.type = type;
+        this.cost = cost;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String toString() {
+        return type + " base";
+    }
+}
+
+// Class to represent Toppings
+class Topping {
+    private String name;
+    private double cost;
+
+    public Topping(String name, double cost) {
+        this.name = name;
+        this.cost = cost;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}
+
+// Class to represent a Pizza
+class Pizza {
+    private Base base;
+    private List<Topping> toppings;
+
+    public Pizza(Base base) {
+        this.base = base;
+        this.toppings = new ArrayList<>();
+    }
+
+    public void addTopping(Topping topping) {
+        toppings.add(topping);
+    }
+
+    public double calculateCost() {
+        double totalCost = base.getCost();
+        for (Topping topping : toppings) {
+            totalCost += topping.getCost();
+        }
+        return totalCost;
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza with " + base + " and toppings " + toppings;
+    }
+}
+
+// Main class to test the Pizza model
+public class PizzaShop {
+    public static void main(String[] args) {
+        // Define the bases and toppings
+        Base standardBase = new Base("Standard", 5.0);
+        Base softBase = new Base("Soft", 6.0);
+        
+        Topping tomato = new Topping("Tomato", 1.0);
+        Topping corn = new Topping("Corn", 1.5);
+        Topping mushrooms = new Topping("Mushrooms", 2.0);
+
+        // Create a new pizza with a Standard base
+        Pizza myPizza = new Pizza(standardBase);
+
+        // Add toppings
+        myPizza.addTopping(tomato);
+        myPizza.addTopping(corn);
+
+        // Calculate and print the cost of the pizza
+        double cost = myPizza.calculateCost();
+        System.out.println(myPizza);
+        System.out.println("Total cost: $" + cost);
+    }
+}
+======================================================================================================================
+// Class to represent a Flower
+class Flower {
+    private String name;
+    private double cost;
+
+    public Flower(String name, double cost) {
+        this.name = name;
+        this.cost = cost;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}
+
+// Class to represent a Bouquet
+class Bouquet {
+    private List<Flower> flowers;
+
+    public Bouquet() {
+        this.flowers = new ArrayList<>();
+    }
+
+    public void addFlower(Flower flower) {
+        flowers.add(flower);
+    }
+
+    public double calculateCost() {
+        double totalCost = 0.0;
+        for (Flower flower : flowers) {
+            totalCost += flower.getCost();
+        }
+        return totalCost;
+    }
+
+    @Override
+    public String toString() {
+        return "Bouquet with flowers: " + flowers;
+    }
+}
+
+// Main class to test the Bouquet model
+public class FlowerShop {
+    public static void main(String[] args) {
+        // Define the flowers with their costs
+        Flower rose = new Flower("Rose", 1.0);
+        Flower jasmine = new Flower("Jasmine", 2.0);
+        Flower lily = new Flower("Lily", 3.0);
+
+        // Create a new bouquet
+        Bouquet myBouquet = new Bouquet();
+
+        // Add flowers to the bouquet
+        myBouquet.addFlower(rose);
+        myBouquet.addFlower(jasmine);
+        myBouquet.addFlower(lily);
+
+        // Calculate and print the cost of the bouquet
+        double cost = myBouquet.calculateCost();
+        System.out.println(myBouquet);
+        System.out.println("Total cost: $" + cost);
+    }
+}
+===================================================================================================================
+// Base class for all Confectioneries
+class Confectionery {
+    private String name;
+    private double weight; // in grams
+
+    public Confectionery(String name, double weight) {
+        this.name = name;
+        this.weight = weight;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + weight + "g)";
+    }
+}
+
+// Derived class for Chocolates
+class Chocolate extends Confectionery {
+    private double price; // in dollars
+
+    public Chocolate(String name, double weight, double price) {
+        super(name, weight);
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", $" + price;
+    }
+}
+
+// Derived class for Sweets
+class Sweet extends Confectionery {
+    public Sweet(String name, double weight) {
+        super(name, weight);
+    }
+}
+
+// Class to manage the Gift
+class Gift {
+    private List<Confectionery> confectioneries;
+
+    public Gift() {
+        this.confectioneries = new ArrayList<>();
+    }
+
+    public void addConfectionery(Confectionery confectionery) {
+        confectioneries.add(confectionery);
+    }
+
+    public double calculateTotalWeight() {
+        return confectioneries.stream().mapToDouble(Confectionery::getWeight).sum();
+    }
+
+    public void sortChocolatesByPrice() {
+        List<Chocolate> chocolates = confectioneries.stream()
+            .filter(c -> c instanceof Chocolate)
+            .map(c -> (Chocolate) c)
+            .collect(Collectors.toList());
+
+        chocolates.sort(Comparator.comparingDouble(Chocolate::getPrice));
+
+        System.out.println("Sorted chocolates by price:");
+        chocolates.forEach(System.out::println);
+    }
+
+    public void findCandiesInWeightRange(double minWeight, double maxWeight) {
+        List<Confectionery> candiesInRange = confectioneries.stream()
+            .filter(c -> c.getWeight() >= minWeight && c.getWeight() <= maxWeight)
+            .collect(Collectors.toList());
+
+        System.out.println("Candies in weight range " + minWeight + "g to " + maxWeight + "g:");
+        candiesInRange.forEach(System.out::println);
+    }
+
+    @Override
+    public String toString() {
+        return "Gift contains: " + confectioneries;
+    }
+}
+
+// Main class to test the Gift management
+public class NewYearGiftManager {
+    public static void main(String[] args) {
+        // Create different confectioneries
+        Chocolate choco1 = new Chocolate("Milk Chocolate", 150, 2.5);
+        Chocolate choco2 = new Chocolate("Dark Chocolate", 100, 3.0);
+        Sweet sweet1 = new Sweet("Candy Cane", 50);
+        Sweet sweet2 = new Sweet("Lollipop", 75);
+
+        // Create a new gift and add confectioneries
+        Gift myGift = new Gift();
+        myGift.addConfectionery(choco1);
+        myGift.addConfectionery(choco2);
+        myGift.addConfectionery(sweet1);
+        myGift.addConfectionery(sweet2);
+
+        // Calculate and print the total weight of the gift
+        double totalWeight = myGift.calculateTotalWeight();
+        System.out.println("Total weight of the gift: " + totalWeight + "g");
+
+        // Sort and print chocolates by price
+        myGift.sortChocolatesByPrice();
+
+        // Find and print candies within a specified weight range
+        myGift.findCandiesInWeightRange(50, 100);
+    }
+}
+==================================================================================================
+class Appliance {
+    private String name;
+    private int powerConsumption; // in units
+
+    public Appliance(String name, int powerConsumption) {
+        this.name = name;
+        this.powerConsumption = powerConsumption;
+    }
+
+    public int getPowerConsumption() {
+        return powerConsumption;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + powerConsumption + " units)";
+    }
+}
+
+// Class to manage a collection of appliances
+class Home {
+    private List<Appliance> appliances;
+
+    public Home() {
+        this.appliances = new ArrayList<>();
+    }
+
+    public void addAppliance(Appliance appliance) {
+        appliances.add(appliance);
+    }
+
+    public int calculateTotalPowerConsumption() {
+        return appliances.stream().mapToInt(Appliance::getPowerConsumption).sum();
+    }
+
+    public void sortAppliancesByPowerConsumption() {
+        appliances.sort(Comparator.comparingInt(Appliance::getPowerConsumption));
+        System.out.println("Appliances sorted by power consumption:");
+        appliances.forEach(System.out::println);
+    }
+
+    @Override
+    public String toString() {
+        return "Home appliances: " + appliances;
+    }
+}
+
+// Main class to test the Home management
+public class PowerManagement {
+    public static void main(String[] args) {
+        // Create different appliances
+        Appliance fan = new Appliance("Fan", 1);
+        Appliance light = new Appliance("Light", 2);
+        Appliance tv = new Appliance("TV", 3);
+        Appliance laptop = new Appliance("Laptop", 5);
+
+        // Create a new home and add appliances
+        Home myHome = new Home();
+        myHome.addAppliance(fan);
+        myHome.addAppliance(light);
+        myHome.addAppliance(tv);
+        myHome.addAppliance(laptop);
+
+        // Calculate and print the total power consumption
+        int totalPower = myHome.calculateTotalPowerConsumption();
+        System.out.println("Total power consumption: " + totalPower + " units");
+
+        // Sort and print appliances by power consumption
+        myHome.sortAppliancesByPowerConsumption();
+    }
+}
+=========================================================================================================
