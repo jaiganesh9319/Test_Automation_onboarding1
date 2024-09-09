@@ -1,0 +1,178 @@
+public static void main(String[] args) {
+        // Example arrays
+        int[] array1 = {1, 2, 1, 1, 3};
+        int[] array2 = {1, 4, 2, 1, 4, 1, 4};
+        int[] array3 = {1, 4, 2, 1, 4, 4, 4};
+
+        // Compute and print the largest span for each array
+        System.out.println(maxSpan(array1)); // Output: 4
+        System.out.println(maxSpan(array2)); // Output: 6
+        System.out.println(maxSpan(array3)); // Output: 6
+    }
+
+    // Method to find the largest span in the array
+    public static int maxSpan(int[] nums) {
+        int maxSpan = 0;
+
+        // Loop through each element in the array
+        for (int i = 0; i < nums.length; i++) {
+            // Find the first occurrence of the current element
+            for (int j = nums.length - 1; j >= i; j--) {
+                if (nums[j] == nums[i]) {
+                    // Calculate the span and update maxSpan if needed
+                    int span = j - i + 1;
+                    if (span > maxSpan) {
+                        maxSpan = span;
+                    }
+                    break; // Exit inner loop once the last occurrence is found
+                }
+            }
+        }
+
+        return maxSpan;
+    }
+=============================================================================================================
+public static void main(String[] args) {
+        // Example arrays
+        int[] array1 = {1, 1, 1, 2, 1};
+        int[] array2 = {2, 1, 1, 2, 1};
+        int[] array3 = {10, 10};
+
+        // Compute and print whether each array can be balanced
+        System.out.println(canBalance(array1)); // Output: true
+        System.out.println(canBalance(array2)); // Output: false
+        System.out.println(canBalance(array3)); // Output: true
+    }
+
+    // Method to check if the array can be balanced
+    public static boolean canBalance(int[] nums) {
+        int totalSum = 0;
+        int leftSum = 0;
+
+        // Calculate the total sum of the array
+        for (int num : nums) {
+            totalSum += num;
+        }
+
+        // Iterate through the array and maintain the leftSum
+        for (int i = 0; i < nums.length - 1; i++) {
+            leftSum += nums[i];
+            // Check if leftSum is equal to the sum of the remaining elements
+            if (leftSum == totalSum - leftSum) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+================================================================================================================
+public static void main(String[] args) {
+        // Example arrays
+        int[] array1 = {1, 2, 2, 3, 4, 4};
+        int[] array2 = {1, 1, 2, 1, 1};
+        int[] array3 = {1, 1, 1, 1, 1};
+
+        // Compute and print the number of clumps for each array
+        System.out.println(countClumps(array1)); // Output: 2
+        System.out.println(countClumps(array2)); // Output: 2
+        System.out.println(countClumps(array3)); // Output: 1
+    }
+
+    // Method to count the number of clumps in the array
+    public static int countClumps(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        int clumpCount = 0;
+        boolean inClump = false;
+
+        for (int i = 1; i < nums.length; i++) {
+            // Check if we are in a clump
+            if (nums[i] == nums[i - 1]) {
+                if (!inClump) {
+                    clumpCount++;
+                    inClump = true;
+                }
+            } else {
+                inClump = false;
+            }
+        }
+
+        return clumpCount;
+    }
+=========================================================================================================
+public static void main(String[] args) {
+        // Example arrays
+        int[] array1 = {1, 2, 3, 8, 9, 3, 2, 1};
+        int[] array2 = {1, 2, 1, 4};
+        int[] array3 = {7, 1, 2, 9, 7, 2, 1};
+
+        // Compute and print the size of the largest mirror section for each array
+        System.out.println(maxMirror(array1)); // Output: 3
+        System.out.println(maxMirror(array2)); // Output: 3
+        System.out.println(maxMirror(array3)); // Output: 2
+    }
+
+    // Method to find the size of the largest mirror section in the array
+    public static int maxMirror(int[] nums) {
+        int maxMirrorLength = 0;
+        int n = nums.length;
+
+        // Iterate through all possible starting points of the mirror section
+        for (int i = 0; i < n; i++) {
+            // Iterate through all possible ending points of the mirror section
+            for (int j = i; j < n; j++) {
+                // Check the mirror length starting from i and ending at j
+                int length = j - i + 1;
+                for (int k = 0; k <= n - length; k++) {
+                    // Compare the segment from i to j with the segment from k to k + length - 1
+                    int l = 0;
+                    while (l < length && nums[i + l] == nums[k + length - 1 - l]) {
+                        l++;
+                    }
+                    // If a complete match is found, update maxMirrorLength
+                    if (l == length) {
+                        maxMirrorLength = Math.max(maxMirrorLength, length);
+                    }
+                }
+            }
+        }
+
+        return maxMirrorLength;
+    }
+==========================================================================================================================
+public static void main(String[] args) {
+        // Example arrays
+        int[] outer1 = {1, 2, 4, 6};
+        int[] inner1 = {2, 4};
+        int[] outer2 = {1, 2, 4, 6};
+        int[] inner2 = {2, 3, 4};
+        int[] outer3 = {1, 2, 4, 4, 6};
+        int[] inner3 = {2, 4};
+
+        // Compute and print whether all elements in inner are in outer for each case
+        System.out.println(linearIn(outer1, inner1)); // Output: true
+        System.out.println(linearIn(outer2, inner2)); // Output: false
+        System.out.println(linearIn(outer3, inner3)); // Output: true
+    }
+
+    // Method to check if all elements in inner appear in outer
+    public static boolean linearIn(int[] outer, int[] inner) {
+        int outerIndex = 0;
+        int innerIndex = 0;
+
+        // Iterate through both arrays
+        while (outerIndex < outer.length && innerIndex < inner.length) {
+            if (outer[outerIndex] == inner[innerIndex]) {
+                // Move to the next element in the inner array
+                innerIndex++;
+            }
+            // Always move to the next element in the outer array
+            outerIndex++;
+        }
+
+        // Check if we have found all elements in the inner array
+        return innerIndex == inner.length;
+    }
+===================================================================================================================

@@ -1,0 +1,263 @@
+int speed = 75;  // Example speed
+        boolean isBirthday = true;  // Example: true if it's your birthday, false otherwise
+
+        // Adjust speed limit if it's your birthday
+        if (isBirthday) {
+            speed -= 5;
+        }
+
+        // Determine the ticket based on the adjusted speed
+        int ticket;
+        if (speed <= 60) {
+            ticket = 0;  // No ticket
+        } else if (speed <= 80) {
+            ticket = 1;  // Small ticket
+        } else {
+            ticket = 2;  // Big ticket
+        }
+
+        // Output the result
+        System.out.println("Ticket: " + ticket);
+==============================================================================================================
+int a = 4;  // Example value for a
+        int b = 2;  // Example value for b
+
+        // Check if either a or b is 6, or if their sum or difference is 6
+        boolean isGreat = (a == 6 || b == 6) || 
+                          (a + b == 6) || 
+                          (Math.abs(a - b) == 6);
+
+        // Output the result
+        System.out.println(isGreat);
+=================================================================================================================
+int tea = 6;    // Example amount of tea
+        int candy = 10; // Example amount of candy
+
+        // Determine the party outcome
+        int outcome;
+        if (tea < 5 || candy < 5) {
+            outcome = 0;  // Bad party
+        } else if (tea >= 2 * candy || candy >= 2 * tea) {
+            outcome = 2;  // Great party
+        } else {
+            outcome = 1;  // Good party
+        }
+
+        // Output the result
+        System.out.println(outcome);
+===================================================================================================================
+int a = 5;  // Example value for a
+        int b = 3;  // Example value for b
+        int c = 2;  // Example value for c
+
+        // Calculate the sums of each pair
+        int ab = a + b;
+        int bc = b + c;
+        int ac = a + c;
+
+        // Determine the result based on the conditions
+        int result;
+        if (ab == 10 || bc == 10 || ac == 10) {
+            result = 10;  // Any pair sums to exactly 10
+        } else if (ab == (bc + 10) || ab == (ac + 10)) {
+            result = 5;   // ab is exactly 10 more than either bc or ac
+        } else {
+            result = 0;   // None of the above conditions are met
+        }
+
+        // Output the result
+        System.out.println(result);
+===============================================================================================================
+public static void main(String[] args) {
+        // Example values
+        int a = 1;
+        int b = 2;
+        int c = 4;
+        boolean bOk = false;
+
+        // Determine if b is greater than a and c is greater than b, with exception if bOk is true
+        boolean result = inOrder(a, b, c, bOk);
+
+        // Output the result
+        System.out.println(result);
+    }
+
+    // Method to check the conditions
+    public static boolean inOrder(int a, int b, int c, boolean bOk) {
+        if (bOk) {
+            return c > b; // If bOk is true, only check if c is greater than b
+        } else {
+            return b > a && c > b; // If bOk is false, check both conditions
+        }
+    }
+==================================================================================================================
+public static void main(String[] args) {
+        // Example values
+        int num1 = 12;
+        int num2 = 23;
+
+        // Determine if there is a common digit
+        boolean result = shareDigit(num1, num2);
+
+        // Output the result
+        System.out.println(result);
+    }
+
+    // Method to check if two numbers share a common digit
+    public static boolean shareDigit(int num1, int num2) {
+        // Extract digits from num1
+        int num1LeftDigit = num1 / 10;
+        int num1RightDigit = num1 % 10;
+
+        // Extract digits from num2
+        int num2LeftDigit = num2 / 10;
+        int num2RightDigit = num2 % 10;
+
+        // Check for common digits
+        return (num1LeftDigit == num2LeftDigit || num1LeftDigit == num2RightDigit ||
+                num1RightDigit == num2LeftDigit || num1RightDigit == num2RightDigit);
+    }
+===================================================================================================================
+public static void main(String[] args) {
+        // Example values
+        int a = 8;
+        int b = 1;
+
+        // Compute the result based on the sum and digit count
+        int result = sumLimit(a, b);
+
+        // Output the result
+        System.out.println(result);
+    }
+
+    // Method to calculate the sum and check digit limits
+    public static int sumLimit(int a, int b) {
+        // Compute the sum of a and b
+        int sum = a + b;
+
+        // Determine the number of digits in a and the sum
+        int digitsA = String.valueOf(a).length();
+        int digitsSum = String.valueOf(sum).length();
+
+        // Return sum if it has the same number of digits as a; otherwise, return a
+        return (digitsSum == digitsA) ? sum : a;
+    }
+================================================================================================================
+public static void main(String[] args) {
+        // Example values
+        String base = "Hello there";
+        String remove = "llo";
+
+        // Compute the result based on the removal of the substring
+        String result = withoutString(base, remove);
+
+        // Output the result
+        System.out.println(result);
+    }
+
+    // Method to remove all instances of the remove string from the base string
+    public static String withoutString(String base, String remove) {
+        // Convert both strings to lower case to ensure case insensitivity
+        String lowerBase = base.toLowerCase();
+        String lowerRemove = remove.toLowerCase();
+
+        // Initialize the result with the base string
+        String result = base;
+
+        // While there are instances of the remove string in the lower case base string
+        while (lowerBase.contains(lowerRemove)) {
+            // Find the index of the first occurrence
+            int index = lowerBase.indexOf(lowerRemove);
+
+            // Remove the substring from the result string
+            result = result.substring(0, index) + result.substring(index + remove.length());
+
+            // Update the lower base string to reflect the removal
+            lowerBase = result.toLowerCase();
+        }
+
+        return result;
+    }
+===================================================================================================================
+public static void main(String[] args) {
+        // Example values
+        String str = "abbCCCddBBBxx";
+
+        // Compute the length of the largest block
+        int result = maxBlock(str);
+
+        // Output the result
+        System.out.println(result);
+    }
+
+    // Method to find the length of the largest block in the string
+    public static int maxBlock(String str) {
+        // Initialize variables to track the current block length and the maximum block length
+        int maxBlockLength = 0;
+        int currentBlockLength = 1;
+
+        // Iterate through the string starting from the second character
+        for (int i = 1; i < str.length(); i++) {
+            // If the current character is the same as the previous character
+            if (str.charAt(i) == str.charAt(i - 1)) {
+                // Increase the length of the current block
+                currentBlockLength++;
+            } else {
+                // Update the maximum block length if necessary
+                if (currentBlockLength > maxBlockLength) {
+                    maxBlockLength = currentBlockLength;
+                }
+                // Reset the current block length for the new character
+                currentBlockLength = 1;
+            }
+        }
+
+        // Final check to update the maxBlockLength after the last block
+        if (currentBlockLength > maxBlockLength) {
+            maxBlockLength = currentBlockLength;
+        }
+
+        return maxBlockLength;
+    }
+=======================================================================================================================
+public static void main(String[] args) {
+        // Example values
+        String str = "abc123xyz";
+
+        // Compute the sum of all numbers in the string
+        int result = sumNumbers(str);
+
+        // Output the result
+        System.out.println(result);
+    }
+
+    // Method to calculate the sum of numbers in the string
+    public static int sumNumbers(String str) {
+        int sum = 0;
+        int currentNumber = 0;
+        boolean inNumber = false;
+
+        // Iterate through each character in the string
+        for (char c : str.toCharArray()) {
+            if (Character.isDigit(c)) {
+                // Build the current number
+                currentNumber = currentNumber * 10 + (c - '0');
+                inNumber = true;
+            } else {
+                // If we encounter a non-digit character and we were building a number
+                if (inNumber) {
+                    sum += currentNumber;
+                    currentNumber = 0;
+                    inNumber = false;
+                }
+            }
+        }
+
+        // Add the last number if the string ended with a digit
+        if (inNumber) {
+            sum += currentNumber;
+        }
+
+        return sum;
+    }
+========================================================================================================================================

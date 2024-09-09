@@ -1,0 +1,80 @@
+public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, /* ..., */ 100};  // Add all elements up to 100
+        int n = 100;
+        boolean[] present = new boolean[n + 1];
+
+        // Mark the numbers that are present in the array
+        for (int a : array) {
+            if (a <= n) {
+                present[a] = true;
+            }
+        }
+
+        // Find the missing numbers
+        List<Integer> li = new ArrayList<Integer>();
+        for (int i = 1; i <= n; i++) {  // Iterate through 1 to n
+            if (!present[i]) {
+                li.add(i);
+            }
+        }
+
+        // Print the missing numbers
+        System.out.println(li);
+    }
+}
+=====================================================================================================================
+public static void main(String[] args) {
+        // Example array
+        int[] numbers = {3, 5, 7, 2, 8, -1, 4, 10, 12};
+
+        // Initialize the biggest and smallest numbers with the first element of the array
+        int biggest = numbers[0];
+        int smallest = numbers[0];
+
+        // Iterate through the array to find the biggest and smallest numbers
+        for (int num : numbers) {
+            if (num > biggest) {
+                biggest = num;
+            }
+            if (num < smallest) {
+                smallest = num;
+            }
+        }
+
+        // Print the results
+        System.out.println("Biggest number: " + biggest);
+        System.out.println("Smallest number: " + smallest);
+    }
+}
+======================================================================================================================
+String s = "algaogriltghmm";
+        Map<Character, Integer> map = new HashMap<>();
+
+        // Count the frequency of each character in the string
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        // Build the sb string based on the frequency count
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            char c = entry.getKey();
+            int count = entry.getValue();
+            for (int i = 0; i < count; i++) {
+                sb.append(c);
+            }
+        }
+
+        System.out.println(sb.toString());
+================================================================================================================
+String s = "madam";
+StringBuilder sb = new StringBuilder(s).reverse().toString();
+if(s.equals(sb))
+{
+System.out.print("palindrome");
+}
+else
+{
+System.out.print("not palindrome");
+}
+==================================================================================================================
