@@ -1,0 +1,19 @@
+Parent Module:
+
+mvn archetype:generate -DgroupId=com.example -DartifactId=multi-module-project -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+Module 1:
+
+mvn archetype:generate -DgroupId=com.example -DartifactId=module1 -Dpackage=com.example.module1 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+Module 2:
+mvn archetype:generate -DgroupId=com.example -DartifactId=module2 -Dpackage=com.example.module2 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+
+Navigate to the root of the multi-module project (multi-module-project) and run the following Maven command
+
+mvn clean install
+
+run specific module builds
+
+mvn clean install -pl modules/module1
