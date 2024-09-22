@@ -1,0 +1,20 @@
+harnessApiVersion: '1.0'
+type: ECS
+containerDefinition:
+  commands:
+  - ''
+  cpu: 256.0
+  logConfiguration:
+    logDriver: awslogs
+    options:
+    - name: awslogs-group
+      value: /ecs/helloworld
+    - name: awslogs-region
+      value: us-east-1
+    - name: awslogs-stream-prefix
+      value: ecs
+  memory: 512
+  name: DEFAULT_NAME
+  portMappings:
+  - containerPort: 8080
+    hostPort: 8080

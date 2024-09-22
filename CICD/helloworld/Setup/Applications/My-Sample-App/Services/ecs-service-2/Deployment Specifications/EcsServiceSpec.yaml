@@ -1,0 +1,11 @@
+harnessApiVersion: '1.0'
+type: ECS_SERVICE_SPEC
+serviceSpecJson: |-
+  {
+  "capacityProviderStrategy":[ ],
+  "placementConstraints":[ ],
+  "placementStrategy":[ ],
+  "healthCheckGracePeriodSeconds":null,
+  "tags":[ ],
+  "schedulingStrategy":"DAEMON"
+  }

@@ -1,0 +1,5 @@
+harnessApiVersion: '1.0'
+type: ECR
+imageName: helloworld-node
+region: us-east-1
+serverName: Amazon Web Services

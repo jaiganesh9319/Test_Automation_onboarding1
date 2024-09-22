@@ -1,0 +1,90 @@
+<html>
+
+<head>
+<link type="text/css" rel="stylesheet" href="styl.css"/>
+<title>
+My Page
+</title>
+</head>
+
+
+<body>
+
+<div class="hbar" > 
+
+<div id="searchbar" class="hbar"><input type="text" placeholder="Search" id="searchbar1"/></div>
+<div id="profilearea2" class="hbar">|</div>
+<div id="profilearea" class="hbar"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/112829-200.png"  height = "30" /></div>
+<div id="profilearea1" class="hbar">Profile</div>
+<div id="status" class="hbar">
+<select>
+  <option value="Available">Available</option>
+  <option value="Busy">Busy</option>
+  <option value="Away">Appear Away</option>
+  <option value="Offline">Offline</option>
+</select>
+</div>
+
+</div>
+
+<div class="header2" >
+</div>
+
+<div class="cover" >
+</div>
+<div class="coverpic" ><img src="coverpicCroped.jpg" width="100%" height="360px"/>
+</div>
+
+<div class="profiletile" >
+</div>
+<div class="profilepic" ><img src="profilepiccroped.jpg" width="168px" height="168px"/>
+</div>
+<div class="nameholder">
+
+	
+	<nav id ="navigationlink">
+		<span id="namewritten">&emsp;Ranjith Doss&nbsp;&nbsp;&emsp;</span>
+		<a href="https://facebook.com/ranjith.doss">FaceBook</a>
+		<a href="https://soundcloud.com/ranjith_doss">SoundCloud</a>
+		<a href="https://twitter.com/ranjithdss">Twitter</a>
+		<a href="https://instagram.com/Ranjith_doss">Instagram</a>
+	</nav>
+	
+	
+</div>
+
+<div class="posts">
+<div id="post1">
+<div id="gstcalc" class="gstclass">
+<h3>GST Calculator</h3><br>
+<br>
+<label title="Enter the price" for="price" onFocus="">Enter the Price</label>
+<input type="number" id="price" ></br>
+<label for="gst">GST</label>
+<input type="text" id="gst" value="18%" disabled> </br>
+<label for="taxed">Amount Taxed</label> 
+<input type="text" disabled id="taxed"></br>
+<label for="total" >Total Price</label> 
+<input type="number" disabled id="total"><br>
+<input type="button" id="calculate" value="Calculate" >
+</div>
+<br>
+<br>
+</div>
+<div id="LikeComment" class="likeComment">
+<input type ="button" value="Like" class="likeclass" id="likebutton" > 
+<span id="likecount" class="likecount">   0   </span>
+<textarea placeholder="Comment here..." class="commentclass"></textarea>
+<input type ="button" value="Comment" class="commentb" id="commentbutton" >
+<hr>
+ <span id="commentoutput" class="commentoutput">   No Comments yet   </span> 
+
+</div>
+
+</div>
+
+
+
+</body>
+
+</html>

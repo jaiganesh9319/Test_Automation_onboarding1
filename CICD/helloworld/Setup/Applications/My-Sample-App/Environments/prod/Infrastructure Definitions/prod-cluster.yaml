@@ -1,0 +1,18 @@
+harnessApiVersion: '1.0'
+type: INFRA_DEFINITION
+cloudProviderType: AWS
+deploymentType: ECS
+infrastructure:
+- type: AWS_ECS
+  assignPublicIp: true
+  cloudProviderName: Amazon Web Services
+  clusterName: prod-cluster
+  executionRole: arn:aws:iam::730186024834:role/ecsTaskExecutionRole
+  launchType: FARGATE
+  region: us-east-1
+  securityGroupIds:
+  - sg-0e67420cfdb24c427
+  subnetIds:
+  - subnet-02f07b65bd0cc1cbf
+  - subnet-075fc1dbbd0942fa0
+  vpcId: vpc-0aa7554a6758ef63b

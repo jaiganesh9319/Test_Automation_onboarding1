@@ -1,0 +1,3 @@
+harnessApiVersion: '1.0'
+type: APPLICATION
+description: This is an lite weight sample app for demo and to simulate non-prod and prod environment

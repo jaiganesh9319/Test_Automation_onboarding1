@@ -1,0 +1,57 @@
+harnessApiVersion: '1.0'
+type: BUILD
+description: ' To build an application as an image and push it to ECR'
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: JENKINS
+      name: Jenkins
+      properties:
+        injectEnvVars: false
+        jenkinsConfigName: Jenkins-1
+        jobName: My-Sample-App-Build
+        jobParameters:
+        - key: BRANCH_NAME
+          value: master
+        publishAsVar: false
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 600000
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    steps:
+    - type: ARTIFACT_COLLECTION
+      name: Artifact Collection
+      properties:
+        artifactStreamName: helloworld-node
+        buildNo: latest
+        entityType: SERVICE
+        regex: true
+        serviceName: ecs-service-1
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 300000
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

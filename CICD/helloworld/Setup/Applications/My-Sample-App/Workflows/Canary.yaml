@@ -1,0 +1,178 @@
+harnessApiVersion: '1.0'
+type: CANARY
+concurrencyStrategy: INFRA
+description: To deploy to prod with Canary deployment
+envName: prod
+failureStrategies:
+- executionScope: WORKFLOW
+  failureTypes:
+  - APPLICATION_ERROR
+  repairActionCode: ROLLBACK_WORKFLOW
+  retryCount: 0
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- type: ECS
+  computeProviderName: Amazon Web Services
+  daemonSet: false
+  infraDefinitionName: prod-cluster
+  name: Phase 1
+  phaseSteps:
+  - type: CONTAINER_SETUP
+    name: Set up Container
+    steps:
+    - type: ECS_SERVICE_SETUP
+      name: ECS Service Setup
+      properties:
+        awsAutoScalarConfigs: null
+        desiredInstanceCount: runningInstances
+        ecsServiceName: ${app.name}__${service.name}__${env.name}
+        fixedInstances: '2'
+        loadBalancerName: My-Sample-App
+        resizeStrategy: RESIZE_NEW_FIRST
+        roleArn: arn:aws:iam::730186024834:role/ECS-task
+        serviceSteadyStateTimeout: 10
+        targetContainerName: ''
+        targetGroupArn: arn:aws:elasticloadbalancing:us-east-1:730186024834:targetgroup/TG-prod-ecs/8f45adfd04229f0f
+        targetPort: ''
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        title: ECS Service Setup
+        useLoadBalancer: true
+    stepsInParallel: false
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 50
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    steps:
+    - type: APPROVAL
+      name: Approval
+      properties:
+        approvalStateType: USER_GROUP
+        timeoutMillis: 86400000
+        userGroupNames:
+        - Account Administrator
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ecs-service-1
+  statefulSet: false
+- type: ECS
+  computeProviderName: Amazon Web Services
+  daemonSet: false
+  infraDefinitionName: prod-cluster
+  name: Phase 2
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 100
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ecs-service-1
+  statefulSet: false
+postDeploymentSteps:
+- type: HTTP
+  name: Mock Sonar Test (API call)
+  properties:
+    assertion: ${httpResponseCode}==200&&json.select("test", ${httpResponseBody}) == "healthy"
+    body: ''
+    executeWithPreviousSteps: false
+    method: GET
+    publishAsVar: false
+    responseProcessingExpressions: ''
+    sweepingOutputName: null
+    sweepingOutputScope: null
+    tags: null
+    templateVariables: ''
+    timeoutMillis: 10000
+    url: https://postman-echo.com/get?test=healthy
+    useProxy: false
+rollbackPhases:
+- type: ECS
+  computeProviderName: Amazon Web Services
+  daemonSet: false
+  infraDefinitionName: prod-cluster
+  name: Rollback Phase 1
+  phaseNameForRollback: Phase 1
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ecs-service-1
+  statefulSet: false
+- type: ECS
+  computeProviderName: Amazon Web Services
+  daemonSet: false
+  infraDefinitionName: prod-cluster
+  name: Rollback Phase 2
+  phaseNameForRollback: Phase 2
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ecs-service-1
+  statefulSet: false
+templatized: false
