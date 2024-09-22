@@ -1,11 +1,11 @@
 node {
    stage("Prepare"){
-    git url: "https://github.com/Ranjithdss15/helloworld.git", branch: "jenkins-deploy"
+    git url: "https://github.com/jaiganesh9319/Test_Automation_onboarding1.git", branch: "Tasks"
   }
   stage("Build"){
-    bat "npm install"
+    bat "cd CICD/helloworld && npm install"
   }
   stage("Deploy"){
-    bat "npm start"
+    bat "cd CICD/helloworld && npm start"
   }
 }
