@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                git url: "https://github.com/Ranjithdss15/helloworld.git", branch: "jenkins-deploy"
+                git url: "https://github.com/jaiganesh9319/Test_Automation_onboarding1.git", branch: "Tasks"
             }
         }
           stage('Build') {
             steps {
-                bat "npm install"
+                bat "cd CICD/helloworld && npm install"
             }
         }
           stage('Deploy') {
             steps {
-                bat "npm start"
+                bat "cd CICD/helloworld && npm start"
             }
         }
     }
