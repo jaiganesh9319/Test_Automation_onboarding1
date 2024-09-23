@@ -1,0 +1,77 @@
+Started by user jaiganesh duraisamy
+Obtained CICD/helloworld/Jenkins-windows-scripted.groovy from git https://github.com/jaiganesh9319/Test_Automation_onboarding1.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Prepare)
+[Pipeline] git
+The recommended git tool is: C:\Program Files\Git\bin\git.exe
+No credentials specified
+ > C:\Program Files\Git\bin\git.exe rev-parse --resolve-git-dir C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject\.git # timeout=10
+Fetching changes from the remote Git repository
+ > C:\Program Files\Git\bin\git.exe config remote.origin.url https://github.com/jaiganesh9319/Test_Automation_onboarding1.git # timeout=10
+Fetching upstream changes from https://github.com/jaiganesh9319/Test_Automation_onboarding1.git
+ > C:\Program Files\Git\bin\git.exe --version # timeout=10
+ > git --version # 'git version 2.46.1.windows.1'
+ > C:\Program Files\Git\bin\git.exe fetch --tags --force --progress -- https://github.com/jaiganesh9319/Test_Automation_onboarding1.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > C:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/Tasks^{commit}" # timeout=10
+Checking out Revision 0aedb314da0b39709db6b49b3bcb501d3a337200 (refs/remotes/origin/Tasks)
+ > C:\Program Files\Git\bin\git.exe config core.sparsecheckout # timeout=10
+ > C:\Program Files\Git\bin\git.exe checkout -f 0aedb314da0b39709db6b49b3bcb501d3a337200 # timeout=10
+ > C:\Program Files\Git\bin\git.exe branch -a -v --no-abbrev # timeout=10
+ > C:\Program Files\Git\bin\git.exe branch -D Tasks # timeout=10
+ > C:\Program Files\Git\bin\git.exe checkout -b Tasks 0aedb314da0b39709db6b49b3bcb501d3a337200 # timeout=10
+Commit message: "Add files via upload"
+ > C:\Program Files\Git\bin\git.exe rev-list --no-walk 38295e265c835a305695da13b4033a443cf86adf # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] bat
+
+C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject>cd CICD/helloworld   && npm install 
+npm warn old lockfile
+npm warn old lockfile The package-lock.json file was created with an old version of npm,
+npm warn old lockfile so supplemental metadata must be fetched from the registry.
+npm warn old lockfile
+npm warn old lockfile This is a one-time fix-up, please be patient...
+npm warn old lockfile
+
+up to date, audited 309 packages in 4s
+
+3 packages are looking for funding
+  run `npm fund` for details
+
+32 vulnerabilities (1 low, 8 moderate, 13 high, 10 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] bat
+
+C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject>cd CICD/helloworld   && npm start 
+
+> mywebapp@1.0.0 start
+> node server.js
+
+Express Started
+Aborted by jaiganesh duraisamy
+Sending interrupt signal to process
+script returned exit code -1
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+org.jenkinsci.plugins.workflow.actions.ErrorAction$ErrorId: 3f02afd6-5305-475c-ae12-cf03515c11c0
+Finished: ABORTED
