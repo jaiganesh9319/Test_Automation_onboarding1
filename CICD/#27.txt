@@ -1,0 +1,69 @@
+Started by user jaiganesh duraisamy
+Replayed #26
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Prepare)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > C:\Program Files\Git\bin\git.exe rev-parse --resolve-git-dir C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject\.git # timeout=10
+Fetching changes from the remote Git repository
+ > C:\Program Files\Git\bin\git.exe config remote.origin.url https://github.com/Ranjithdss15/helloworld.git # timeout=10
+Fetching upstream changes from https://github.com/Ranjithdss15/helloworld.git
+ > C:\Program Files\Git\bin\git.exe --version # timeout=10
+ > git --version # 'git version 2.46.1.windows.1'
+ > C:\Program Files\Git\bin\git.exe fetch --tags --force --progress -- https://github.com/Ranjithdss15/helloworld.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > C:\Program Files\Git\bin\git.exe rev-parse "refs/remotes/origin/jenkins-deploy^{commit}" # timeout=10
+Checking out Revision 68068d2ab1632f905f5c5bfcd62eb4d6c12c4364 (refs/remotes/origin/jenkins-deploy)
+ > C:\Program Files\Git\bin\git.exe config core.sparsecheckout # timeout=10
+ > C:\Program Files\Git\bin\git.exe checkout -f 68068d2ab1632f905f5c5bfcd62eb4d6c12c4364 # timeout=10
+ > C:\Program Files\Git\bin\git.exe branch -a -v --no-abbrev # timeout=10
+ > C:\Program Files\Git\bin\git.exe branch -D jenkins-deploy # timeout=10
+ > C:\Program Files\Git\bin\git.exe checkout -b jenkins-deploy 68068d2ab1632f905f5c5bfcd62eb4d6c12c4364 # timeout=10
+Commit message: "Update server.js"
+ > C:\Program Files\Git\bin\git.exe rev-list --no-walk 68068d2ab1632f905f5c5bfcd62eb4d6c12c4364 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] bat
+
+C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject>npm install 
+npm warn old lockfile
+npm warn old lockfile The package-lock.json file was created with an old version of npm,
+npm warn old lockfile so supplemental metadata must be fetched from the registry.
+npm warn old lockfile
+npm warn old lockfile This is a one-time fix-up, please be patient...
+npm warn old lockfile
+
+up to date, audited 309 packages in 4s
+
+3 packages are looking for funding
+  run `npm fund` for details
+
+32 vulnerabilities (1 low, 8 moderate, 13 high, 10 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] bat
+
+C:\Users\jaiganesh_duraisamy\.jenkins\workspace\jenkinsproject>start /B npm start 
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
